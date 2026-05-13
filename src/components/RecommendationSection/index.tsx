@@ -99,7 +99,7 @@ export function RecommendationSection({
       <div
         className="rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden min-h-[260px]"
         style={{
-          background: '#7c3aed',
+          background: '#a855f7',
         }}
       >
         {/* Background star decoration */}
@@ -141,11 +141,11 @@ export function RecommendationSection({
               value={selectedGenre}
               onChange={(e) => setSelectedGenre(e.target.value)}
             >
-              <option value="" style={{ background: '#7c3aed', color: 'white' }}>
+              <option value="" style={{ background: '#a855f7', color: 'white' }}>
                 Selecione ou pesquise..
               </option>
               {mockGenres.map((g) => (
-                <option key={g} value={g} style={{ background: '#7c3aed', color: 'white' }}>
+                <option key={g} value={g} style={{ background: '#a855f7', color: 'white' }}>
                   {g}
                 </option>
               ))}
