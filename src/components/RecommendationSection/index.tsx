@@ -200,7 +200,7 @@ export function RecommendationSection({
         </div>
 
         {recommendation ? (
-          <div className="flex-1 max-w-[240px] animate-fade-in">
+          <div className="flex-1 w-full animate-fade-in">
             <ItemCard
               item={recommendation}
               onEdit={onEditItem}
