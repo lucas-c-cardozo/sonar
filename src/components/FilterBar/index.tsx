@@ -22,8 +22,8 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
       id="filter-bar"
       className="rounded-2xl p-6 mb-6"
       style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border-color)',
+        background: '#ddd4f7',
+        border: '1px solid var(--border-accent)',
       }}
     >
       {/* Title */}
@@ -158,7 +158,6 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
           className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95"
           style={{
             background: 'var(--color-accent)',
-            boxShadow: '0 3px 12px rgba(124,58,237,0.3)',
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -175,7 +174,6 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
           className="ml-auto flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95"
           style={{
             background: 'var(--color-accent-dark)',
-            boxShadow: '0 3px 12px rgba(109,40,217,0.35)',
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">

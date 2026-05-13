@@ -99,7 +99,7 @@ export function RecommendationSection({
       <div
         className="rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden min-h-[260px]"
         style={{
-          background: 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)',
+          background: '#7c3aed',
         }}
       >
         {/* Background star decoration */}
@@ -232,8 +232,8 @@ export function RecommendationSection({
       <div
         className="rounded-2xl p-4 flex flex-col gap-1"
         style={{
-          background: 'var(--bg-white)',
-          border: '1px solid var(--border-color)',
+          background: '#ddd4f7',
+          border: '1px solid var(--border-accent)',
         }}
       >
         {allLists.map((listName) => {

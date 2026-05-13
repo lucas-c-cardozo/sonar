@@ -5,8 +5,7 @@ export function Header() {
     <header
       className="w-full sticky top-0 z-40"
       style={{
-        background: 'linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%)',
-        boxShadow: '0 4px 20px rgba(91, 33, 182, 0.3)',
+        background: '#6d28d9',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative overflow-hidden">
