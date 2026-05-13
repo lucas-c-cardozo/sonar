@@ -1,65 +1,323 @@
-import Image from "next/image";
+'use client';
+
+import React, { useState, useCallback, useRef } from 'react';
+import { Header } from '@/components/Header';
+import { FilterBar } from '@/components/FilterBar';
+import { RecommendationSection } from '@/components/RecommendationSection';
+import { CollapsibleList } from '@/components/CollapsibleList';
+import { Footer } from '@/components/Footer';
+import { ItemFormModal } from '@/components/ItemFormModal';
+import { ConfirmationModal } from '@/components/ConfirmationModal';
+import { ItemCard } from '@/components/ItemCard';
+import { IItem, FilterState, EMPTY_FILTERS, FIXED_LISTS } from '@/types/item';
+import { useItemStore, useFilteredItems, useItemsByList } from '@/hooks/useItems';
 
 export default function Home() {
+  const { items, createItem, updateItem, deleteItem } = useItemStore();
+
+  // Filters
+  const [filters, setFilters] = useState<FilterState>(EMPTY_FILTERS);
+  const [activeFilters, setActiveFilters] = useState<FilterState>(EMPTY_FILTERS);
+  const isFiltering = Object.values(activeFilters).some((v) =>
+    Array.isArray(v) ? v.length > 0 : v !== ''
+  );
+
+  const filteredItems = useFilteredItems(items, activeFilters);
+
+  // Modal state
+  const [formOpen, setFormOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<IItem | null>(null);
+  const [prefillData, setPrefillData] = useState<Partial<IItem> | undefined>(undefined);
+
+  // Delete confirmation
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  // Custom lists (created by user)
+  const [customLists, setCustomLists] = useState<string[]>([]);
+
+  // Create list modal
+  const [showCreateList, setShowCreateList] = useState(false);
+  const [newListName, setNewListName] = useState('');
+
+  // All lists = fixed + custom
+  const allLists = [...FIXED_LISTS, ...customLists];
+
+  // Refs for scroll-to-list
+  const listRefs = useRef<Record<string, HTMLElement | null>>({});
+
+  // Filter handler
+  const handleSearch = useCallback(() => {
+    setActiveFilters({ ...filters });
+  }, [filters]);
+
+  const handleClearFilters = useCallback(() => {
+    setFilters(EMPTY_FILTERS);
+    setActiveFilters(EMPTY_FILTERS);
+  }, []);
+
+  // Form handlers
+  const openAddModal = useCallback((initial?: Partial<IItem>) => {
+    setEditingItem(null);
+    setPrefillData(initial);
+    setFormOpen(true);
+  }, []);
+
+  const openEditModal = useCallback((item: IItem) => {
+    setEditingItem(item);
+    setPrefillData(undefined);
+    setFormOpen(true);
+  }, []);
+
+  const handleFormSubmit = useCallback((item: IItem) => {
+    // Collect any new lists created in the form
+    const newLists = item.lists.filter((l) => !FIXED_LISTS.includes(l as never) && !customLists.includes(l));
+    if (newLists.length > 0) setCustomLists((prev) => [...prev, ...newLists]);
+
+    if (editingItem) {
+      updateItem(item);
+    } else {
+      createItem(item);
+    }
+  }, [editingItem, updateItem, createItem, customLists]);
+
+  const handleDeleteRequest = useCallback((id: string) => {
+    setDeleteId(id);
+  }, []);
+
+  const handleConfirmDelete = useCallback(() => {
+    if (deleteId) deleteItem(deleteId);
+    setDeleteId(null);
+  }, [deleteId, deleteItem]);
+
+  // Scroll to list
+  const handleScrollToList = useCallback((listName: string) => {
+    const el = document.getElementById(`list-${listName.replace(/\s+/g, '-').toLowerCase()}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
+  // Create new list
+  const handleCreateList = useCallback(() => {
+    setShowCreateList(true);
+  }, []);
+
+  const confirmCreateList = useCallback(() => {
+    const trimmed = newListName.trim();
+    if (trimmed && !allLists.includes(trimmed)) {
+      setCustomLists((prev) => [...prev, trimmed]);
+    }
+    setNewListName('');
+    setShowCreateList(false);
+  }, [newListName, allLists]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
+      <Header />
+
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Filter Bar */}
+        <FilterBar
+          filters={filters}
+          onChange={setFilters}
+          onSearch={handleSearch}
+          onClear={handleClearFilters}
+          onAddItem={() => openAddModal()}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Active filter notice */}
+        {isFiltering && (
+          <div
+            className="mb-4 px-4 py-2.5 rounded-xl text-sm flex items-center justify-between animate-fade-in"
+            style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', color: 'var(--color-accent)' }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <span>🔍 Mostrando {filteredItems.length} resultado(s) filtrado(s)</span>
+            <button
+              className="text-xs underline hover:opacity-70 font-semibold"
+              onClick={handleClearFilters}
+            >
+              Limpar
+            </button>
+          </div>
+        )}
+
+        {/* Recommendation Section */}
+        <RecommendationSection
+          items={items}
+          onAddItem={(item) => openAddModal(item)}
+          onEditItem={openEditModal}
+          onDeleteItem={handleDeleteRequest}
+          allLists={allLists}
+          onScrollToList={handleScrollToList}
+          onCreateList={handleCreateList}
+        />
+
+        {/* Lists */}
+        {isFiltering ? (
+          /* When filtering, show a single flat list of results */
+          <section
+            className="rounded-2xl p-5"
+            style={{ background: 'var(--bg-white)', border: '1px solid var(--border-color)' }}
           >
-            Documentation
-          </a>
-        </div>
+            <h2 className="text-sm font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>
+              Resultados
+            </h2>
+            {filteredItems.length === 0 ? (
+              <div className="flex flex-col items-center py-12 gap-3">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)' }}>
+                  <path d="M9 18V5l12-2v13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+                <p className="text-base font-semibold" style={{ color: 'var(--text-secondary)' }}>Nenhum item encontrado</p>
+                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Tente outros filtros ou limpe a busca</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+                {filteredItems.map((item) => (
+                  <FilteredItemCard
+                    key={item.id}
+                    item={item}
+                    onEdit={openEditModal}
+                    onDelete={handleDeleteRequest}
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+        ) : (
+          /* Normal view: each list */
+          <>
+            {allLists.map((listName, i) => (
+              <ListSection
+                key={listName}
+                listName={listName}
+                items={items}
+                defaultOpen={i < 3}
+                onEdit={openEditModal}
+                onDelete={handleDeleteRequest}
+              />
+            ))}
+          </>
+        )}
       </main>
+
+      <Footer />
+
+      {/* Item Form Modal */}
+      <ItemFormModal
+        isOpen={formOpen}
+        editItem={editingItem}
+        initialData={prefillData}
+        onClose={() => { setFormOpen(false); setEditingItem(null); setPrefillData(undefined); }}
+        onSubmit={handleFormSubmit}
+      />
+
+      {/* Delete Confirmation */}
+      <ConfirmationModal
+        isOpen={!!deleteId}
+        title="Excluir item?"
+        message="O item será removido permanentemente. A alteração não poderá ser desfeita."
+        confirmLabel="Excluir"
+        cancelLabel="Cancelar"
+        danger={true}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setDeleteId(null)}
+      />
+
+      {/* Create List Modal */}
+      {showCreateList && (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4"
+          style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(6px)' }}
+          onClick={() => setShowCreateList(false)}
+        >
+          <div
+            className="rounded-2xl p-6 w-full max-w-sm shadow-2xl animate-fade-in"
+            style={{
+              background: 'var(--bg-white)',
+              border: '1px solid var(--border-color)',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.15)',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Criar nova lista
+            </h2>
+            <input
+              type="text"
+              className="w-full rounded-lg px-3 py-2.5 text-sm outline-none mb-4"
+              style={{
+                background: 'var(--bg-white)',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-primary)',
+              }}
+              placeholder="Nome da lista..."
+              value={newListName}
+              onChange={(e) => setNewListName(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') confirmCreateList(); }}
+              autoFocus
+            />
+            <div className="flex gap-3">
+              <button
+                type="button"
+                className="flex-1 py-2.5 rounded-xl text-sm font-semibold"
+                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}
+                onClick={() => { setShowCreateList(false); setNewListName(''); }}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white hover:opacity-90"
+                style={{ background: 'var(--color-accent)', boxShadow: '0 4px 12px rgba(124,58,237,0.3)' }}
+                onClick={confirmCreateList}
+              >
+                Criar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
+}
+
+// Extracted to avoid re-render issues with hooks inside map
+function ListSection({
+  listName,
+  items,
+  defaultOpen,
+  onEdit,
+  onDelete,
+}: {
+  listName: string;
+  items: IItem[];
+  defaultOpen: boolean;
+  onEdit: (item: IItem) => void;
+  onDelete: (id: string) => void;
+}) {
+  const listItems = useItemsByList(items, listName);
+  return (
+    <CollapsibleList
+      title={listName}
+      items={listItems}
+      defaultOpen={defaultOpen}
+      onEditItem={onEdit}
+      onDeleteItem={onDelete}
+    />
+  );
+}
+
+// Simple wrapper for filtered results
+function FilteredItemCard({
+  item,
+  onEdit,
+  onDelete,
+}: {
+  item: IItem;
+  onEdit: (item: IItem) => void;
+  onDelete: (id: string) => void;
+}) {
+  return <ItemCard item={item} onEdit={onEdit} onDelete={onDelete} />;
 }
