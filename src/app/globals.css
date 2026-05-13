@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Force light color-scheme so Opera GX / any browser dark mode cannot override */
+:root {
+  color-scheme: light only;
+}
+
 :root {
   /* ─── Light Lilac Theme (Figma) ─── */
   --bg-primary: #f3f0ff;
@@ -69,6 +74,8 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  /* Prevents browser forced-dark overrides */
+  forced-color-adjust: none;
 }
 
 body {
@@ -77,6 +84,41 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Anti-dark-mode: re-assert all light tokens when OS/browser is dark ─── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light only;
+    --bg-primary: #f3f0ff !important;
+    --bg-surface: #e9e0ff !important;
+    --bg-surface-alt: #ddd4f7 !important;
+    --bg-surface-hover: #d0c5f0 !important;
+    --bg-white: #ffffff !important;
+    --color-accent: #7c3aed !important;
+    --color-accent-dark: #6d28d9 !important;
+    --color-accent-darker: #5b21b6 !important;
+    --color-accent-light: #8b5cf6 !important;
+    --color-accent-glow: rgba(124, 58, 237, 0.2) !important;
+    --color-secondary: #06b6d4 !important;
+    --color-secondary-light: #22d3ee !important;
+    --color-highlight: #f59e0b !important;
+    --color-highlight-light: #fbbf24 !important;
+    --color-danger: #ef4444 !important;
+    --color-danger-dark: #dc2626 !important;
+    --color-success: #10b981 !important;
+    --text-primary: #1e1b4b !important;
+    --text-secondary: #4b5563 !important;
+    --text-muted: #9ca3af !important;
+    --border-color: #d1c9e8 !important;
+    --border-accent: #a78bfa !important;
+    --header-bg: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%) !important;
+  }
+
+  html, body {
+    background: #f3f0ff !important;
+    color: #1e1b4b !important;
+  }
 }
 
 /* Scrollbar */

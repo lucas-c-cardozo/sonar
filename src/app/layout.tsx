@@ -14,11 +14,12 @@ export const metadata: Metadata = {
   title: 'Sonar — Seu catálogo musical',
   description: 'Descubra, registre e compartilhe sua música favorita com o Sonar.',
   keywords: ['música', 'catálogo musical', 'recomendações', 'álbuns', 'playlist'],
+  colorScheme: 'light',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={inter.variable}>
+    <html lang="pt-BR" className={inter.variable} data-theme="light" style={{ colorScheme: 'light' }}>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>
