@@ -1,39 +1,37 @@
+import { mockItems } from '@/data/mockData';
 import { IItem } from '@/types/item';
-import { mockItems, mockGenres } from '@/data/mockData';
-import { useMemo } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useCallback } from 'react';
 
-export function useRecommendation(selectedGenre: string, items: IItem[]): IItem | null {
-  return useMemo(() => {
-    if (!selectedGenre) return null;
+export function useRecommendation(
+  selectedGenre: string,
+  items: IItem[],
+  setRecommendation: React.Dispatch<React.SetStateAction<IItem | null>>,
+  setGenerating: React.Dispatch<React.SetStateAction<boolean>>
+): () => void {
+  return useCallback(() => {
+    if (!selectedGenre) return;
+    setGenerating(true);
+    setRecommendation(null);
 
-    // Try to find a real item with this genre that is NOT already in generated recommendations
-    const candidates = items.filter(
-      (i) => i.genres.includes(selectedGenre) && !i.isGeneratedRecommendation
-    );
+    setTimeout(() => {
+      const candidates = mockItems.filter( 
+        (i) =>
+          i.genres.includes(selectedGenre)
+          && !items.some(item => item.id === i.id)
+      );
+      const pool = candidates.length > 0 ? candidates : items;
+      const picked = pool[Math.floor(Math.random() * pool.length)];
 
-    if (candidates.length > 0) {
-      const picked = candidates[Math.floor(Math.random() * candidates.length)];
-      return {
-        ...picked,
-        id: uuidv4(),
-        isGeneratedRecommendation: true,
-        recommendedBy: ['Sonar'],
-        lists: [],
-      };
-    }
-
-    // Fallback: pick any item
-    const fallback = mockItems[Math.floor(Math.random() * mockItems.length)];
-    return {
-      ...fallback,
-      id: uuidv4(),
-      isGeneratedRecommendation: true,
-      recommendedBy: ['Sonar'],
-      lists: [],
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGenre]);
+      if (picked) {
+        setRecommendation({
+          ...picked,
+          id: `rec-${Date.now()}`,
+          isGeneratedRecommendation: true,
+          recommendedBy: ['Sonar'],
+          lists: [],
+        });
+      }
+      setGenerating(false);
+    }, 600);
+  }, [selectedGenre, setGenerating, setRecommendation, items]);
 }
-
-export { mockGenres };

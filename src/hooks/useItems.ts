@@ -70,5 +70,8 @@ export function useFilteredItems(items: IItem[], filters: FilterState): IItem[] 
 }
 
 export function useItemsByList(items: IItem[], listName: string): IItem[] {
-  return useMemo(() => items.filter((i) => i.lists.includes(listName)), [items, listName]);
+  return useMemo(
+    () => items.filter((i) => i.lists.includes(listName)),
+    [items, listName]
+  );
 }

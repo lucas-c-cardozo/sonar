@@ -2,8 +2,9 @@
 
 import { ItemCard } from '@/components/ItemCard';
 import { mockGenres } from '@/data/mockData';
+import { useRecommendation } from '@/hooks/useRecommendation';
 import { FIXED_LISTS, IItem } from '@/types/item';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 interface RecommendationSectionProps {
   items: IItem[];
@@ -65,30 +66,12 @@ export function RecommendationSection({
   const [recommendation, setRecommendation] = useState<IItem | null>(null);
   const [generating, setGenerating] = useState(false);
 
-  const generate = useCallback(() => {
-    if (!selectedGenre) return;
-    setGenerating(true);
-    setRecommendation(null);
-
-    setTimeout(() => {
-      const candidates = items.filter(
-        (i) => i.genres.includes(selectedGenre) && !i.isGeneratedRecommendation
-      );
-      const pool = candidates.length > 0 ? candidates : items;
-      const picked = pool[Math.floor(Math.random() * pool.length)];
-
-      if (picked) {
-        setRecommendation({
-          ...picked,
-          id: `rec-${Date.now()}`,
-          isGeneratedRecommendation: true,
-          recommendedBy: ['Sonar'],
-          lists: [],
-        });
-      }
-      setGenerating(false);
-    }, 600);
-  }, [selectedGenre, items]);
+  const generate = useRecommendation(
+    selectedGenre,
+    items,
+    setRecommendation,
+    setGenerating
+  );
 
   return (
     <section
