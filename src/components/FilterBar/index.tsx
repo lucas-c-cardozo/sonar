@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
-import { FilterState, ITEM_TYPES, FIXED_LISTS } from '@/types/item';
 import { MultiSelect } from '@/components/MultiSelect';
-import { mockGenres, mockTags, mockArtists, mockRecommenders } from '@/data/mockData';
+import { mockArtists, mockGenres, mockRecommenders, mockTags } from '@/data/mockData';
+import { FilterState, FIXED_LISTS, ITEM_TYPES } from '@/types/item';
 
 interface FilterBarProps {
   filters: FilterState;
