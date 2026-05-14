@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
-import { IItem, FIXED_LISTS } from '@/types/item';
+import { ItemCard } from '@/components/ItemCard';
 import { mockGenres } from '@/data/mockData';
+import { FIXED_LISTS, IItem } from '@/types/item';
+import React, { useCallback, useState } from 'react';
 
 interface RecommendationSectionProps {
   items: IItem[];
@@ -96,7 +97,7 @@ export function RecommendationSection({
     >
       {/* ── Column 1: Recommendation Generator ── */}
       <div
-        className="rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden min-h-[260px]"
+        className="rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden min-h-65"
         style={{
           background: '#917AC7',
         }}
@@ -182,94 +183,14 @@ export function RecommendationSection({
 
       {/* ── Column 2: Recommendation Result ── */}
       <div className="flex flex-col">
-        {/* Header */}
-        <div className="mb-3">
-          <p className="text-xs font-medium" style={{ color: 'var(--text-muted)' }}>
-            Minha recomendação
-          </p>
-          <p className="text-sm">
-            <span style={{ color: 'var(--text-secondary)' }}>Gerada por </span>
-            <span className="font-extrabold text-lg" style={{ color: 'var(--color-accent-dark)' }}>SONAR</span>
-          </p>
-        </div>
-
         {recommendation ? (
-          <div
-            className="animate-fade-in rounded-xl overflow-hidden flex flex-row items-center gap-0"
-            style={{
-              background: 'var(--bg-white)',
-              border: '1px solid var(--color-highlight)',
-              boxShadow: '0 4px 20px rgba(245,158,11,0.15)',
-            }}
-          >
-            {/* Cover — fixed square, full image visible */}
-            <div
-              className="flex-shrink-0 relative overflow-hidden"
-              style={{ width: '112px', height: '112px', background: 'var(--bg-surface)' }}
-            >
-              {recommendation.coverUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={recommendation.coverUrl}
-                  alt={`Capa de ${recommendation.title}`}
-                  className="w-full h-full object-contain"
-                />
-              ) : (
-                <div
-                  className="w-full h-full flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, var(--bg-surface), var(--bg-surface-alt))' }}
-                >
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)' }}>
-                    <path d="M9 18V5l12-2v13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="1.5" />
-                    <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
-                </div>
-              )}
-              {/* Ribbon */}
-              <div
-                className="absolute bottom-0 left-0 right-0 text-xs text-center py-0.5 font-semibold"
-                style={{ background: 'var(--color-highlight)', color: '#1e1b4b', fontSize: '0.6rem' }}
-              >
-                ★ Sonar
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
-              <div className="flex flex-col gap-1 min-w-0">
-                <h3 className="font-bold text-sm leading-tight truncate" style={{ color: 'var(--text-primary)' }}>
-                  {recommendation.title}
-                </h3>
-                <p className="text-xs truncate" style={{ color: 'var(--text-secondary)' }}>
-                  {recommendation.artists.join(', ')}
-                </p>
-                <span
-                  className="badge self-start text-white"
-                  style={{ background: 'var(--color-accent)', fontSize: '0.6rem' }}
-                >
-                  {recommendation.type}
-                </span>
-                {recommendation.genres.length > 0 && (
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    {recommendation.genres.slice(0, 3).join(', ')}
-                  </p>
-                )}
-              </div>
-
-              {/* Add button */}
-              <button
-                type="button"
-                onClick={() => onAddItem(recommendation)}
-                className="mt-2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95 self-start"
-                style={{ background: 'var(--color-accent-dark)' }}
-              >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 5v14M5 12h14" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
-                </svg>
-                Adicionar
-              </button>
-            </div>
+          <div className="flex-1 w-full animate-fade-in">
+            <ItemCard
+              item={recommendation}
+              onEdit={onEditItem}
+              onDelete={onDeleteItem}
+              onAdd={onAddItem}
+            />
           </div>
         ) : (
           <div
@@ -309,24 +230,24 @@ export function RecommendationSection({
               type="button"
               className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium transition-all duration-150 hover:scale-[1.02] active:scale-[0.98] text-left"
               style={{
-                color: 'rgba(255,255,255,0.95)',
+                color: 'var(--color-accent-dark)',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.15)';
+                (e.currentTarget as HTMLElement).style.background = 'var(--bg-surface)';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.background = 'transparent';
               }}
               onClick={() => onScrollToList(listName)}
             >
-              <span style={{ color: 'rgba(255,255,255,0.8)', flexShrink: 0 }}>{icon}</span>
+              <span style={{ color: 'var(--color-accent)', flexShrink: 0 }}>{icon}</span>
               <span className="flex-1 truncate">{listName}</span>
               {isCustom && (
-                <span className="badge text-xs" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', fontSize: '0.6rem' }}>
+                <span className="badge text-xs" style={{ background: 'var(--bg-surface)', color: 'var(--color-accent)', fontSize: '0.6rem' }}>
                   custom
                 </span>
               )}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'rgba(255,255,255,0.5)', flexShrink: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
                 <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
@@ -340,14 +261,14 @@ export function RecommendationSection({
             <button
               type="button"
               className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-sm font-medium transition-all duration-150 hover:scale-[1.02] active:scale-[0.98] text-left"
-              style={{ color: 'rgba(255,255,255,0.95)' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.15)'; }}
+              style={{ color: 'var(--color-accent-dark)' }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-surface)'; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
               onClick={onCreateList}
             >
-              <span style={{ color: 'rgba(255,255,255,0.8)', flexShrink: 0 }}>{defaultListIcon}</span>
+              <span style={{ color: 'var(--color-accent)', flexShrink: 0 }}>{defaultListIcon}</span>
               <span className="flex-1">Listas criadas</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'rgba(255,255,255,0.5)', flexShrink: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
                 <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>

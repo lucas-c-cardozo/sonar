@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { IItem } from '@/types/item';
 import { OptionsMenu } from '@/components/OptionsMenu';
+import { IItem } from '@/types/item';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 interface ItemCardProps {
   item: IItem;
@@ -20,7 +21,7 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
 
   return (
     <article
-      className="relative rounded-xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in"
+      className="relative rounded-xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in w-fit justify-self-center"
       style={{
         background: isHighlighted ? '#fef9ee' : 'var(--bg-white)',
         border: `1px solid ${isHighlighted ? 'var(--color-highlight)' : 'var(--border-color)'}`,
@@ -45,12 +46,13 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
         style={{ marginTop: isHighlighted ? '20px' : 0 }}
       >
         {item.coverUrl && !imgError ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={item.coverUrl}
             alt={`Capa de ${item.title}`}
-            className="w-full h-full object-cover"
+            className="w-auto h-auto object-cover"
             onError={() => setImgError(true)}
+            height={300}
+            width={300}
           />
         ) : (
           <div
