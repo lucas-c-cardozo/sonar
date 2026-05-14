@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
-import { FilterState, ITEM_TYPES, FIXED_LISTS } from '@/types/item';
 import { MultiSelect } from '@/components/MultiSelect';
-import { mockGenres, mockTags, mockArtists, mockRecommenders } from '@/data/mockData';
+import { mockArtists, mockGenres, mockRecommenders, mockTags } from '@/data/mockData';
+import { FilterState, FIXED_LISTS, ITEM_TYPES } from '@/types/item';
 
 interface FilterBarProps {
   filters: FilterState;
@@ -179,7 +178,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M12 5v14M5 12h14" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
-          + Adicionar novo item
+          Adicionar novo item
         </button>
       </div>
     </section>
