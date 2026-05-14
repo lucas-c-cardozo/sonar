@@ -22,7 +22,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
       id="filter-bar"
       className="rounded-2xl p-6 mb-6"
       style={{
-        background: '#ddd4f7',
+        background: '#917AC7',
         border: '1px solid var(--border-accent)',
       }}
     >
@@ -179,7 +179,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M12 5v14M5 12h14" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
-          + Adicionar novo item
+          Adicionar novo item
         </button>
       </div>
     </section>
