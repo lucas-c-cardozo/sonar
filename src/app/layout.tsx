@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: 'Sonar — Seu catálogo musical',
   description: 'Descubra, registre e compartilhe sua música favorita com o Sonar.',
   keywords: ['música', 'catálogo musical', 'recomendações', 'álbuns', 'playlist'],
+};
+
+export const viewport: Viewport = {
   colorScheme: 'light',
 };
 
