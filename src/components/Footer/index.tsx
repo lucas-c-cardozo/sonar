@@ -1,6 +1,4 @@
-import React from 'react';
-
-const teamMembers = ['Isadora Porto', 'Lucas Cardozo', 'Luiz Edson', 'Luiz Gabriel Sandes'];
+const teamMembers = ['Isadora Porto', 'Lucas Cardozo', 'Luiz Edson', 'Gabriel Sandes'];
 const professor = 'Prof. Italo Carlo';
 
 export function Footer() {
