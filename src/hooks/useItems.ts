@@ -25,7 +25,7 @@ export function useItemStore() {
 
   useEffect(() => {
     const unsub = subscribe(() => rerender((n) => n + 1));
-    return unsub;
+    unsub();
   }, []);
 
   const items = _items;
