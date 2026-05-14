@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const teamMembers = ['Isadora Porto', 'Lucas Cardozo', 'Luiz Edson', 'Gabriel Sandes'];
 const professor = 'Prof. Italo Carlo';
 
@@ -51,14 +53,10 @@ export function Footer() {
             </div>
             {/* IFAL Logo placeholder */}
             <div
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg"
+              className="flex items-center rounded-lg"
               style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)' }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <rect width="24" height="24" rx="4" fill="#1a6b3c" />
-                <text x="3" y="17" fontSize="10" fill="white" fontWeight="bold">IF</text>
-              </svg>
-              <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>IFAL</span>
+              <Image src="https://www2.ifal.edu.br/o-ifal/comunicacao/arquivos/logos/logos-arapiraca/novo-logo_arapiraca_hor-color.png" width={180} height={100} alt="logo ifal"/>
             </div>
           </div>
         </div>
