@@ -11,17 +11,17 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start gap-2">
-            <span
-              className="text-2xl font-bold tracking-wider"
-              style={{
-                background: 'linear-gradient(135deg, #5b21b6 0%, #8b5cf6 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl"
+              style={{ background: '#917AC7' }}
             >
-              Sonar
-            </span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <span className="text-lg font-extrabold text-white tracking-wider">
+                SONAR
+              </span>
+            </div>
             <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
               Seu catálogo musical colaborativo
             </p>
@@ -32,7 +32,7 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>
               Equipe
             </p>
-            <ul className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
+            <ul className="flex flex-col gap-1">
               {teamMembers.map((name) => (
                 <li key={name} className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                   {name}

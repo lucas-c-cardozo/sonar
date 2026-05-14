@@ -7,10 +7,10 @@
 
 :root {
   /* ─── Light Lilac Theme (Figma) ─── */
-  --bg-primary: #f3f0ff;
-  --bg-surface: #e9e0ff;
-  --bg-surface-alt: #ddd4f7;
-  --bg-surface-hover: #d0c5f0;
+  --bg-primary: #ede8f5;
+  --bg-surface: #c9bce3;
+  --bg-surface-alt: #917AC7;
+  --bg-surface-hover: #7d69b3;
   --bg-white: #ffffff;
 
   /* Accent / Purple */
@@ -43,7 +43,7 @@
   --border-accent: #a78bfa;
 
   /* Header */
-  --header-bg: #9333ea;
+  --header-bg: #917AC7;
 }
 
 @theme inline {
@@ -81,7 +81,7 @@ html {
 body {
   background: var(--bg-primary) !important;
   color: var(--text-primary) !important;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-roboto), 'Roboto', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }

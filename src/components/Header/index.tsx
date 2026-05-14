@@ -5,7 +5,7 @@ export function Header() {
     <header
       className="w-full sticky top-0 z-40"
       style={{
-        background: '#9333ea',
+        background: '#917AC7',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative overflow-hidden">

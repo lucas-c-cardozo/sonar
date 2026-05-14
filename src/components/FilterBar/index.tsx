@@ -21,7 +21,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
       id="filter-bar"
       className="rounded-2xl p-6 mb-6"
       style={{
-        background: '#ddd4f7',
+        background: '#917AC7',
         border: '1px solid var(--border-accent)',
       }}
     >
