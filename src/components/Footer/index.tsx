@@ -56,7 +56,13 @@ export function Footer() {
               className="flex items-center rounded-lg"
               style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)' }}
             >
-              <Image src="https://www2.ifal.edu.br/o-ifal/comunicacao/arquivos/logos/logos-arapiraca/novo-logo_arapiraca_hor-color.png" width={180} height={100} alt="logo ifal"/>
+              <Image
+                src="https://www2.ifal.edu.br/o-ifal/comunicacao/arquivos/logos/logos-arapiraca/novo-logo_arapiraca_hor-color.png"
+                width={400}
+                height={400}
+                alt="logo ifal"
+                className="size-auto max-w-50"
+              />
             </div>
           </div>
         </div>
