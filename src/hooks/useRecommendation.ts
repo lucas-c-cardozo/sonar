@@ -19,18 +19,20 @@ export function useRecommendation(
           i.genres.includes(selectedGenre)
           && !items.some(item => item.id === i.id)
       );
-      const pool = candidates.length > 0 ? candidates : items;
-      const picked = pool[Math.floor(Math.random() * pool.length)];
 
-      if (picked) {
-        setRecommendation({
+      const picked = candidates[Math.floor(Math.random() * candidates.length)];
+
+      setRecommendation(
+        picked
+        ? {
           ...picked,
           id: `rec-${Date.now()}`,
           isGeneratedRecommendation: true,
           recommendedBy: ['Sonar'],
           lists: [],
-        });
-      }
+        }
+        : null
+      );
       setGenerating(false);
     }, 600);
   }, [selectedGenre, setGenerating, setRecommendation, items]);

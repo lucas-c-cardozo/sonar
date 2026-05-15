@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 // ─── Global in-memory store ───────────────────────────────────────────────────
-let _items: IItem[] = [...mockItems];
+let _items: IItem[] = mockItems.filter(i => i.lists.length);
 const _listeners = new Set<() => void>();
 
 function subscribe(fn: () => void) {

@@ -2,7 +2,7 @@ import { IItem } from '@/types/item';
 
 export const mockGenres = [
   'Hip-Hop', 'R&B', 'Jazz', 'Soul', 'Pop', 'Rock', 'Eletrônico',
-  'Indie', 'Lo-fi', 'Funk', 'Reggae', 'MPB', 'Sertanejo', 'Trap',
+  'Indie', 'Lo-fi', 'Funk', 'Reggaeton', 'MPB', 'Sertanejo', 'Trap',
   'Alternative', 'Afrobeats', 'Drill', 'Neo Soul',
 ];
 
@@ -98,10 +98,10 @@ export const mockItems: IItem[] = [
     artists: ['Bad Bunny'],
     type: 'Álbum',
     coverUrl: covers.unVerano,
-    genres: ['Reggae', 'Trap', 'Pop'],
+    genres: ['Reggaeton', 'Trap', 'Pop'],
     tags: ['festa', 'novo'],
-    lists: ['Recomendações'],
-    recommendedBy: ['Carla', 'João'],
+    lists: [],
+    recommendedBy: [],
   },
   {
     id: '6',
@@ -111,8 +111,8 @@ export const mockItems: IItem[] = [
     coverUrl: covers.renaissance,
     genres: ['Eletrônico', 'Funk', 'R&B'],
     tags: ['festa', 'euforia'],
-    lists: ['Recomendações'],
-    recommendedBy: ['Beatriz'],
+    lists: [],
+    recommendedBy: [],
   },
 
   // Lançamentos Recentes
