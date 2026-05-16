@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Badge } from '../Badge';
 
 interface MultiSelectProps {
   id?: string;
@@ -52,11 +53,7 @@ export function MultiSelect({ id, label, options, value, onChange, placeholder =
       {value.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-1.5">
           {value.map((v) => (
-            <span
-              key={v}
-              className="badge text-white flex items-center gap-1"
-              style={{ background: 'var(--color-accent)', fontSize: '0.7rem' }}
-            >
+            <Badge key={v}>
               {v}
               <button
                 type="button"
@@ -66,7 +63,7 @@ export function MultiSelect({ id, label, options, value, onChange, placeholder =
               >
                 ×
               </button>
-            </span>
+            </Badge>
           ))}
         </div>
       )}

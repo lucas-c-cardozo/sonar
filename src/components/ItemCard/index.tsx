@@ -4,6 +4,7 @@ import { OptionsMenu } from '@/components/OptionsMenu';
 import { IItem } from '@/types/item';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
+import { Badge } from '../Badge';
 
 interface ItemCardProps {
   item: IItem;
@@ -113,13 +114,8 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
           </p>
         </div>
 
-        {/* Type badge — filled purple */}
-        <span
-          className="badge self-start text-white"
-          style={{ background: 'var(--color-accent)', fontSize: '0.65rem' }}
-        >
-          {item.type}
-        </span>
+        {/* Type badge */}
+        <Badge>{item.type}</Badge>
 
         {/* Recommended by */}
         {item.recommendedBy && item.recommendedBy.length > 0 && (

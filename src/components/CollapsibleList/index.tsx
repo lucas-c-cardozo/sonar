@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { IItem } from '@/types/item';
 import { ItemCard } from '@/components/ItemCard';
+import { IItem } from '@/types/item';
+import { useState } from 'react';
+import { Badge } from '../Badge';
 
 interface CollapsibleListProps {
   title: string;
@@ -51,15 +52,7 @@ export function CollapsibleList({
           >
             {title}
           </span>
-          <span
-            className="badge text-xs text-white"
-            style={{
-              background: 'var(--color-accent)',
-              padding: '1px 8px',
-            }}
-          >
-            {items.length}
-          </span>
+          <Badge>{items.length}</Badge>
         </div>
 
         <svg

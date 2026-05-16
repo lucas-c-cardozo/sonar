@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { IItem, ItemType, ITEM_TYPES, FIXED_LISTS } from '@/types/item';
-import { MultiSelectCreatable } from '@/components/MultiSelectCreatable';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
-import { mockGenres, mockTags, mockArtists, mockRecommenders } from '@/data/mockData';
+import { MultiSelectCreatable } from '@/components/MultiSelectCreatable';
+import { mockArtists, mockGenres, mockRecommenders, mockTags } from '@/data/mockData';
+import { FIXED_LISTS, IItem, ITEM_TYPES, ItemType } from '@/types/item';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface ItemFormModalProps {
@@ -53,9 +53,19 @@ export function ItemFormModal({ isOpen, editItem, onClose, onSubmit, initialData
     setErrors({});
   }, [isOpen, editItem, initialData]);
 
-  const set = <K extends keyof IItem>(key: K, val: IItem[K]) => {
-    setForm((f) => ({ ...f, [key]: val }));
-    setErrors((e) => { const copy = { ...e }; delete copy[key]; return copy; });
+  const set = <K extends keyof IItem>(
+    key: K,
+    value: IItem[K]
+  ) => {
+    setForm((prev) => ({
+      ...prev,
+      [key]: value }
+    ));
+    setErrors((prev) => {
+      const copy = { ...prev };
+      delete copy[key];
+      return copy;
+    });
   };
 
   const validate = (): boolean => {
