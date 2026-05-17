@@ -41,9 +41,6 @@
   /* Borders */
   --border-color: #d1c9e8;
   --border-accent: #a78bfa;
-
-  /* Header */
-  --header-bg: #917AC7;
 }
 
 @theme inline {
