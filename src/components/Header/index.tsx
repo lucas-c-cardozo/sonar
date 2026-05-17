@@ -1,12 +1,7 @@
-import React from 'react';
-
 export function Header() {
   return (
     <header
-      className="w-full sticky top-0 z-40"
-      style={{
-        background: '#917AC7',
-      }}
+      className="w-full sticky top-0 z-40 bg-bg-surface-alt"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative overflow-hidden">
         {/* Left side: logo */}
@@ -31,20 +26,20 @@ export function Header() {
         {/* Right side: decorative music icons */}
         <div className="flex items-center gap-3 z-10">
           {/* Headphone icon */}
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-white/40 animate-float" style={{ animationDelay: '0s' }}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-white/40 animate-float animation-delay-0">
             <path d="M3 18v-6a9 9 0 0 1 18 0v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z" stroke="currentColor" strokeWidth="1.5" />
           </svg>
 
           {/* Music notes */}
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-white/50 animate-float" style={{ animationDelay: '0.5s' }}>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-white/50 animate-float animation-delay-500">
             <path d="M9 18V5l12-2v13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="1.5" />
             <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="1.5" />
           </svg>
 
           {/* Speaker icon */}
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-white/40 animate-float" style={{ animationDelay: '1s' }}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-white/40 animate-float animation-delay-1000">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.1" />
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
