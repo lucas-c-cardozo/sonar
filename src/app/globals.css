@@ -44,23 +44,39 @@
 }
 
 @theme inline {
-  /* colors */
+  /* Colors */
+  /* ─── Light Lilac Theme (Figma) ─── */
   --color-bg-primary: var(--bg-primary);
   --color-bg-surface: var(--bg-surface);
   --color-bg-surface-alt: var(--bg-surface-alt);
   --color-bg-surface-hover: var(--bg-surface-hover);
+
+  /* Accent / Purple */
   --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-accent-darker: var(--color-accent-darker);
   --color-accent-light: var(--color-accent-light);
+  --color-accent-glow: var(--color-accent-glow);
+
+  /* Secondary */
   --color-secondary: var(--color-secondary);
   --color-secondary-light: var(--color-secondary-light);
+
+  /* Highlight (recommendation) */
   --color-highlight: var(--color-highlight);
   --color-highlight-light: var(--color-highlight-light);
+
+  /* Feedback */
   --color-danger: var(--color-danger);
   --color-danger-dark: var(--color-danger-dark);
   --color-success: var(--color-success);
+
+  /* Text */
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
+  
+  /* Borders */
   --color-border: var(--border-color);
   --color-border-accent: var(--border-accent);
 
