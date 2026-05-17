@@ -116,7 +116,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
                 <path d="M16.5 16.5L21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </div>
-            <button type="button" className="info-btn" aria-label="Informação">i</button>
+            <button type="button" className="size-6 rounded-full flex items-center justify-center bg-accent text-white text-xs font-bold shrink-0 cursor-pointer transition hover:bg-accent-dark hover:scale-110" aria-label="Informação">i</button>
           </div>
         </div>
 

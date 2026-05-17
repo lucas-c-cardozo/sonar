@@ -105,7 +105,7 @@ export function MultiSelect({ id, label, options, value, onChange, placeholder =
         </div>
 
         {/* Info button ⓘ */}
-        <button type="button" className="info-btn" aria-label="Informação">
+        <button type="button" className="size-6 rounded-full flex items-center justify-center bg-accent text-white text-xs font-bold shrink-0 cursor-pointer transition hover:bg-accent-dark hover:scale-110" aria-label="Informação">
           i
         </button>
       </div>
