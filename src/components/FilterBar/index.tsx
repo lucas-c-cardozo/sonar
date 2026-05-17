@@ -19,7 +19,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
   return (
     <section
       id="filter-bar"
-      className="rounded-2xl p-6 mb-6 bg-bg-surface-alt border border-solid border-border-accent"
+      className="rounded-2xl p-6 mb-6 bg-bg-surface-alt border border-border-accent"
     >
       {/* Title */}
       <div className="flex items-center gap-2 mb-5">
@@ -87,7 +87,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
             Título
           </label>
           <div className="flex items-center gap-1.5">
-            <div className={`flex items-center flex-1 rounded-lg px-3 py-2 gap-2 bg-white border border-solid border-${filters.title ? 'accent-light' : 'border'} transition-colors duration-200`}>
+            <div className={`flex items-center flex-1 rounded-lg px-3 py-2 gap-2 bg-white border border-${filters.title ? 'accent-light' : 'border'} transition-colors duration-200`}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-text-muted shrink-0">
                 <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
@@ -120,12 +120,12 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
       </div>
 
       {/* Action buttons */}
-      <div className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-solid border-border">
+      <div className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-border">
         {/* Limpar filtros — outline style */}
         <button
           id="filter-clear-btn"
           onClick={onClear}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm text-text-primary font-semibold transition-all duration-200 hover:opacity-80 hover:scale-105 active:scale-95 bg-white border border-solid border-border"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm text-text-primary font-semibold transition-all duration-200 hover:opacity-80 hover:scale-105 active:scale-95 bg-white border border-border"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-accent">
             <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M5 6l1 14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
