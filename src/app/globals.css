@@ -44,6 +44,7 @@
 }
 
 @theme inline {
+  /* colors */
   --color-bg-primary: var(--bg-primary);
   --color-bg-surface: var(--bg-surface);
   --color-bg-surface-alt: var(--bg-surface-alt);
@@ -62,6 +63,15 @@
   --color-text-muted: var(--text-muted);
   --color-border: var(--border-color);
   --color-border-accent: var(--border-accent);
+
+  /* animations */
+  --animation-delay-0: 0ms;
+  --animation-delay-500: 500ms;
+  --animation-delay-1000: 1000ms;
+}
+
+@utility animation-delay-* {
+  animation-delay: --value(--animation-delay-*) !important;
 }
 
 * {
