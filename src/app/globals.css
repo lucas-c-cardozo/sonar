@@ -83,6 +83,17 @@
   --animation-delay-0: 0ms;
   --animation-delay-500: 500ms;
   --animation-delay-1000: 1000ms;
+
+  --animate-float: float 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
 }
 
 @utility animation-delay-* {
@@ -123,15 +134,6 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-light);
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
 }
 
 /* Glass morphism utility (for modals) */
