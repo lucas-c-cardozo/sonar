@@ -1,7 +1,7 @@
+import { Providers } from '@/components/Providers';
 import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import './globals.css';
-import { Providers } from '@/components/Providers';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={roboto.variable} data-theme="light" style={{ colorScheme: 'light' }}>
+    <html lang="pt-BR" className={`${roboto.variable} scheme-light`} data-theme="light">
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>
