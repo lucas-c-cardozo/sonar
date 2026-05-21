@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 interface ConfirmationModalProps {
   isOpen: boolean;
   title: string;
@@ -27,36 +25,29 @@ export function ConfirmationModal({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(6px)' }}
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[.375rem]"
       onClick={onCancel}
     >
       <div
-        className="rounded-2xl p-6 w-full max-w-sm shadow-2xl animate-fade-in"
-        style={{
-          background: 'var(--bg-white)',
-          border: '1px solid var(--border-color)',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.15)',
-        }}
+        className="rounded-2xl p-6 w-full max-w-sm animate-fade-in bg-white border border-border shadow-[0_1.5625rem_3.75rem] shadow-black/15"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Icon */}
         <div className="flex items-center justify-center mb-4">
           <div
-            className="w-14 h-14 rounded-full flex items-center justify-center text-2xl"
-            style={{ background: danger ? 'rgba(239,68,68,0.1)' : 'rgba(124,58,237,0.1)' }}
+            className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl bg-${danger ? 'danger' : 'accent'}/10`}
           >
             ⚠️
           </div>
         </div>
 
         {/* Title */}
-        <h2 className="text-center text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+        <h2 className="text-center text-lg text-text-primary font-bold mb-2">
           {title}
         </h2>
 
         {/* Message */}
-        <p className="text-center text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+        <p className="text-center text-sm text-text-secondary mb-6">
           {message}
         </p>
 
@@ -65,12 +56,7 @@ export function ConfirmationModal({
           <button
             id="confirm-modal-cancel-btn"
             type="button"
-            className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-80"
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--text-secondary)',
-            }}
+            className="flex-1 py-2.5 rounded-xl text-sm text-text-secondary font-semibold transition-all duration-200 hover:opacity-80 bg-bg-surface border border-border"
             onClick={onCancel}
           >
             {cancelLabel}
@@ -78,11 +64,7 @@ export function ConfirmationModal({
           <button
             id="confirm-modal-confirm-btn"
             type="button"
-            className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95"
-            style={{
-              background: danger ? 'var(--color-danger)' : 'var(--color-accent)',
-              boxShadow: danger ? '0 4px 12px rgba(239,68,68,0.3)' : '0 4px 12px rgba(124,58,237,0.3)',
-            }}
+            className={`flex-1 py-2.5 rounded-xl text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95 shadow-[0_.25rem_.75rem] ${danger ? 'bg-danger shadow-danger/30': 'bg-accent shadow-accent/30'}`}
             onClick={onConfirm}
           >
             {confirmLabel}

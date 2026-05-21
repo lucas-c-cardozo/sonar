@@ -46,7 +46,7 @@ export function Footer() {
               <p className="text-sm text-text-secondary">{professor}</p>
             </div>
             {/* IFAL Logo placeholder */}
-            <div className="flex items-center rounded-lg bg-bg-primary border border-solid border-border-color">
+            <div className="flex items-center rounded-lg bg-bg-primary border border-border-color">
               <Image
                 src="https://www2.ifal.edu.br/o-ifal/comunicacao/arquivos/logos/logos-arapiraca/novo-logo_arapiraca_hor-color.png"
                 width={400}
@@ -58,7 +58,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-4 text-center text-xs text-text-muted border-t border-solid border-border-color">
+        <div className="mt-8 pt-4 text-center text-xs text-text-muted border-t border-border-color">
           © {new Date().getFullYear()} Sonar · IFAL — Instituto Federal de Alagoas
         </div>
       </div>

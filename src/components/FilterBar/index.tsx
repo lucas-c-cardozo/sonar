@@ -19,19 +19,15 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
   return (
     <section
       id="filter-bar"
-      className="rounded-2xl p-6 mb-6"
-      style={{
-        background: '#917AC7',
-        border: '1px solid var(--border-accent)',
-      }}
+      className="rounded-2xl p-6 mb-6 bg-bg-surface-alt border border-border-accent"
     >
       {/* Title */}
       <div className="flex items-center gap-2 mb-5">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-primary)' }}>
+        <svg className="text-text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none">
           <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" />
           <path d="M8 7h8M8 12h5M8 17h7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
-        <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+        <h2 className="text-lg font-bold text-text-primary">
           Filtros
         </h2>
       </div>
@@ -87,36 +83,28 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
 
         {/* Title — text input styled to match CSM inputs */}
         <div className="relative">
-          <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
+          <label className="block text-xs text-text-primary font-semibold mb-1.5">
             Título
           </label>
           <div className="flex items-center gap-1.5">
-            <div
-              className="flex items-center flex-1 rounded-lg px-3 py-2 gap-2"
-              style={{
-                background: 'var(--bg-white)',
-                border: `1px solid ${filters.title ? 'var(--color-accent-light)' : 'var(--border-color)'}`,
-                transition: 'border-color 0.2s',
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
+            <div className={`flex items-center flex-1 rounded-lg px-3 py-2 gap-2 bg-white border border-${filters.title ? 'accent-light' : 'border'} transition-colors duration-200`}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-text-muted shrink-0">
                 <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
               <input
                 id="filter-title"
                 type="text"
-                className="flex-1 bg-transparent text-sm outline-none min-w-0"
-                style={{ color: 'var(--text-primary)' }}
-                placeholder="Selecione ou pesquise.."
+                className="flex-1 bg-transparent text-sm text-text-primary outline-none min-w-0"
+                placeholder="Selecione ou pesquise..."
                 value={filters.title}
                 onChange={(e) => set('title', e.target.value)}
               />
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-text-muted">
                 <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
                 <path d="M16.5 16.5L21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </div>
-            <button type="button" className="info-btn" aria-label="Informação">i</button>
+            <button type="button" className="size-6 rounded-full flex items-center justify-center bg-accent text-white text-xs font-bold shrink-0 cursor-pointer transition hover:bg-accent-dark hover:scale-110" aria-label="Informação">i</button>
           </div>
         </div>
 
@@ -132,19 +120,14 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
       </div>
 
       {/* Action buttons */}
-      <div className="flex flex-wrap gap-3 mt-6 pt-4" style={{ borderTop: '1px solid var(--border-color)' }}>
+      <div className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-border">
         {/* Limpar filtros — outline style */}
         <button
           id="filter-clear-btn"
           onClick={onClear}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-80 hover:scale-105 active:scale-95"
-          style={{
-            background: 'var(--bg-white)',
-            border: '1px solid var(--border-color)',
-            color: 'var(--text-primary)',
-          }}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm text-text-primary font-semibold transition-all duration-200 hover:opacity-80 hover:scale-105 active:scale-95 bg-white border border-border"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--color-accent)' }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-accent">
             <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M5 6l1 14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
           Limpar filtros
@@ -154,10 +137,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
         <button
           id="filter-search-btn"
           onClick={onSearch}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95"
-          style={{
-            background: 'var(--color-accent)',
-          }}
+          className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95 bg-accent"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <circle cx="11" cy="11" r="7" stroke="white" strokeWidth="2" />
@@ -170,10 +150,7 @@ export function FilterBar({ filters, onChange, onSearch, onClear, onAddItem }: F
         <button
           id="filter-add-btn"
           onClick={onAddItem}
-          className="ml-auto flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95"
-          style={{
-            background: 'var(--color-accent-dark)',
-          }}
+          className="ml-auto flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:scale-105 active:scale-95 bg-accent-dark"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M12 5v14M5 12h14" stroke="white" strokeWidth="2.5" strokeLinecap="round" />

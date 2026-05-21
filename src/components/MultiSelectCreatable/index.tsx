@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
 import { MultiSelect } from '@/components/MultiSelect';
+import React, { useRef, useState } from 'react';
 
 interface MultiSelectCreatableProps {
   id?: string;
@@ -63,12 +63,7 @@ export function MultiSelectCreatable({
         <button
           type="button"
           onClick={handlePlusClick}
-          className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg font-bold text-white transition-all duration-200 hover:scale-105 active:scale-95"
-          style={{
-            background: showInput ? 'var(--color-success)' : 'var(--color-accent)',
-            marginTop: label ? '24px' : '0',
-            boxShadow: '0 2px 8px rgba(124,58,237,0.3)',
-          }}
+          className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg font-bold text-white transition-transform duration-200 hover:scale-105 active:scale-95 bg-${showInput ? 'success' : 'accent'} ${label ? 'mt-6' : 'mt-0'} shadow-[0_0.125rem_0.5rem] shadow-accent/30`}
           aria-label={showInput ? 'Confirmar adição' : 'Adicionar nova opção'}
         >
           {showInput ? '✓' : '+'}
@@ -80,12 +75,7 @@ export function MultiSelectCreatable({
           <input
             ref={inputRef}
             type="text"
-            className="w-full rounded-lg px-3 py-2 text-sm outline-none transition-all"
-            style={{
-              background: 'var(--bg-white)',
-              border: '1px solid var(--color-accent-light)',
-              color: 'var(--text-primary)',
-            }}
+            className="w-full rounded-lg px-3 py-2 text-sm outline-none transition-all bg-white border border-accent-light text-text-primary"
             placeholder="Digite para adicionar..."
             value={newText}
             onChange={(e) => setNewText(e.target.value)}
