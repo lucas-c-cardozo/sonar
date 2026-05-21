@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useCallback, useRef } from 'react';
-import { Header } from '@/components/Header';
-import { FilterBar } from '@/components/FilterBar';
-import { RecommendationSection } from '@/components/RecommendationSection';
 import { CollapsibleList } from '@/components/CollapsibleList';
-import { Footer } from '@/components/Footer';
-import { ItemFormModal } from '@/components/ItemFormModal';
 import { ConfirmationModal } from '@/components/ConfirmationModal';
+import { FilterBar } from '@/components/FilterBar';
+import { Footer } from '@/components/Footer';
+import { Header } from '@/components/Header';
 import { ItemCard } from '@/components/ItemCard';
-import { IItem, FilterState, EMPTY_FILTERS, FIXED_LISTS } from '@/types/item';
-import { useItemStore, useFilteredItems, useItemsByList } from '@/hooks/useItems';
+import { ItemFormModal } from '@/components/ItemFormModal';
+import { RecommendationSection } from '@/components/RecommendationSection';
+import { useFilteredItems, useItemsByList, useItemStore } from '@/hooks/useItems';
+import { EMPTY_FILTERS, FilterState, FIXED_LISTS, IItem } from '@/types/item';
+import { useCallback, useRef, useState } from 'react';
 
 export default function Home() {
   const { items, createItem, updateItem, deleteItem } = useItemStore();
@@ -112,7 +112,7 @@ export default function Home() {
   }, [newListName, allLists]);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
+    <div className="min-h-screen flex flex-col bg-bg-primary">
       <Header />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -128,8 +128,7 @@ export default function Home() {
         {/* Active filter notice */}
         {isFiltering && (
           <div
-            className="mb-4 px-4 py-2.5 rounded-xl text-sm flex items-center justify-between animate-fade-in"
-            style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', color: 'var(--color-accent)' }}
+            className="mb-4 px-4 py-2.5 rounded-xl text-sm text-accent flex items-center justify-between animate-fade-in bg-accent/8 border border-accent/20"
           >
             <span>🔍 Mostrando {filteredItems.length} resultado(s) filtrado(s)</span>
             <button
@@ -155,22 +154,19 @@ export default function Home() {
         {/* Lists */}
         {isFiltering ? (
           /* When filtering, show a single flat list of results */
-          <section
-            className="rounded-2xl p-5"
-            style={{ background: 'var(--bg-white)', border: '1px solid var(--border-color)' }}
-          >
-            <h2 className="text-sm font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>
+          <section className="rounded-2xl p-5 bg-white border border-border">
+            <h2 className="text-sm text-text-muted font-bold uppercase tracking-widest mb-4">
               Resultados
             </h2>
             {filteredItems.length === 0 ? (
               <div className="flex flex-col items-center py-12 gap-3">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)' }}>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" className="text-text-muted">
                   <path d="M9 18V5l12-2v13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="1.5" />
                   <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="1.5" />
                 </svg>
-                <p className="text-base font-semibold" style={{ color: 'var(--text-secondary)' }}>Nenhum item encontrado</p>
-                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Tente outros filtros ou limpe a busca</p>
+                <p className="text-base font-semibold text-text-secondary">Nenhum item encontrado</p>
+                <p className="text-sm text-text-muted">Tente outros filtros ou limpe a busca</p>
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
@@ -228,30 +224,19 @@ export default function Home() {
       {/* Create List Modal */}
       {showCreateList && (
         <div
-          className="fixed inset-0 z-[80] flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(6px)' }}
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/40 backdrop-blur-[.375rem]"
           onClick={() => setShowCreateList(false)}
         >
           <div
-            className="rounded-2xl p-6 w-full max-w-sm shadow-2xl animate-fade-in"
-            style={{
-              background: 'var(--bg-white)',
-              border: '1px solid var(--border-color)',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.15)',
-            }}
+            className="rounded-2xl p-6 w-full max-w-sm animate-fade-in bg-white border border-border shadow-[0_1.5625rem_3.75rem] shadow-black/15"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+            <h2 className="text-lg text-text-primary font-bold mb-4">
               Criar nova lista
             </h2>
             <input
               type="text"
-              className="w-full rounded-lg px-3 py-2.5 text-sm outline-none mb-4"
-              style={{
-                background: 'var(--bg-white)',
-                border: '1px solid var(--border-color)',
-                color: 'var(--text-primary)',
-              }}
+              className="w-full rounded-lg px-3 py-2.5 text-sm text-text-primary outline-none mb-4 bg-white border border-border"
               placeholder="Nome da lista..."
               value={newListName}
               onChange={(e) => setNewListName(e.target.value)}
@@ -261,16 +246,14 @@ export default function Home() {
             <div className="flex gap-3">
               <button
                 type="button"
-                className="flex-1 py-2.5 rounded-xl text-sm font-semibold"
-                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}
+                className="flex-1 py-2.5 rounded-xl text-sm text-text-secondary font-semibold bg-bg-surface border border-border"
                 onClick={() => { setShowCreateList(false); setNewListName(''); }}
               >
                 Cancelar
               </button>
               <button
                 type="button"
-                className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white hover:opacity-90"
-                style={{ background: 'var(--color-accent)', boxShadow: '0 4px 12px rgba(124,58,237,0.3)' }}
+                className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white hover:opacity-90 bg-accent shadow-[0_.25rem_.75rem] shadow-accent/30"
                 onClick={confirmCreateList}
               >
                 Criar
