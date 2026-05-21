@@ -22,30 +22,17 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
 
   return (
     <article
-      className="relative rounded-xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in w-fit justify-self-center"
-      style={{
-        background: isHighlighted ? '#fef9ee' : 'var(--bg-white)',
-        border: `1px solid ${isHighlighted ? 'var(--color-highlight)' : 'var(--border-color)'}`,
-        boxShadow: isHighlighted
-          ? '0 4px 20px rgba(245,158,11,0.15)'
-          : '0 2px 8px rgba(0,0,0,0.06)',
-      }}
+      className={`relative rounded-xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fade-in w-fit justify-self-center border ${isHighlighted ? 'bg-[#fef9ee] border-highlight shadow-[0_0.25rem_1.25rem] shadow-highlight/15' : 'bg-white border-border shadow-[0_0.125rem_0.5rem] shadow-black/6' }`}
     >
       {/* Highlighted ribbon */}
       {isHighlighted && (
-        <div
-          className="absolute top-0 left-0 right-0 text-xs text-center py-0.5 font-semibold z-10"
-          style={{ background: 'var(--color-highlight)', color: '#1e1b4b' }}
-        >
+        <div className="absolute top-0 left-0 right-0 text-xs text-center py-0.5 font-semibold z-10 bg-highlight text-text-primary">
           ★ Recomendação Sonar
         </div>
       )}
 
       {/* Cover art */}
-      <div
-        className="w-full aspect-square relative overflow-hidden flex-shrink-0"
-        style={{ marginTop: isHighlighted ? '20px' : 0 }}
-      >
+      <div className={`w-full aspect-square relative overflow-hidden shrink-0 ${isHighlighted ? 'mt-5' : 'mt-0'}`}>
         {item.coverUrl && !imgError ? (
           <Image
             src={item.coverUrl}
@@ -56,11 +43,8 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
             width={300}
           />
         ) : (
-          <div
-            className="w-full h-full flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, var(--bg-surface), var(--bg-surface-alt))' }}
-          >
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--text-muted)' }}>
+          <div className="w-full h-full flex items-center justify-center bg-[linear-gradient(135deg,var(--bg-surface),var(--bg-surface-alt))]">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" className="text-text-muted">
               <path d="M9 18V5l12-2v13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               <circle cx="6" cy="18" r="3" stroke="currentColor" strokeWidth="1.5" />
               <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="1.5" />
@@ -78,12 +62,7 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
               ref={btnRef}
               id={`item-menu-btn-${item.id}`}
               type="button"
-              className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors duration-150"
-              style={{
-                background: menuOpen ? 'var(--bg-surface-hover)' : 'rgba(255,255,255,0.85)',
-                backdropFilter: 'blur(4px)',
-                color: 'var(--text-secondary)',
-              }}
+              className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors duration-150 bg-${menuOpen? 'bg-surface-hover' : 'white/85'} backdrop-blur-xs text-text-secondary`}
               onClick={() => setMenuOpen((o) => !o)}
               aria-label="Opções"
             >
@@ -106,10 +85,10 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
 
         {/* Title */}
         <div className="pr-6">
-          <h3 className="font-bold text-sm leading-tight truncate" style={{ color: 'var(--text-primary)' }}>
+          <h3 className="font-bold text-sm leading-tight truncate text-text-primary">
             {item.title}
           </h3>
-          <p className="text-xs truncate mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-xs truncate mt-0.5 text-text-secondary">
             {item.artists.join(', ')}
           </p>
         </div>
@@ -119,9 +98,9 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
 
         {/* Recommended by */}
         {item.recommendedBy && item.recommendedBy.length > 0 && (
-          <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-            <span style={{ color: 'var(--text-muted)' }}>Recomendado por: </span>
-            <span style={{ color: isHighlighted ? 'var(--color-highlight)' : 'var(--color-accent)' }}>
+          <p className="text-xs text-text-secondary">
+            <span className="text-text-muted">Recomendado por: </span>
+            <span className={`text-${isHighlighted ? 'highlight' : 'accent'}`}>
               {item.recommendedBy.join(', ')}
             </span>
           </p>
@@ -130,8 +109,8 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
         {/* Genres */}
         {item.genres.length > 0 && (
           <div>
-            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Gênero: </span>
-            <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+            <span className="text-xs text-text-muted">Gênero: </span>
+            <span className="text-xs text-text-secondary">
               {item.genres.slice(0, 3).join(', ')}
               {item.genres.length > 3 && ` +${item.genres.length - 3}`}
             </span>
@@ -141,8 +120,8 @@ export function ItemCard({ item, onEdit, onDelete, onAdd }: ItemCardProps) {
         {/* Tags */}
         {item.tags.length > 0 && (
           <div>
-            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Tags: </span>
-            <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+            <span className="text-xs text-text-muted">Tags: </span>
+            <span className="text-xs text-text-secondary">
               {item.tags.slice(0, 3).join(', ')}
             </span>
           </div>
