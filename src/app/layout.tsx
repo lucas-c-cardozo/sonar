@@ -16,10 +16,6 @@ export const metadata: Metadata = {
   keywords: ['música', 'catálogo musical', 'recomendações', 'álbuns', 'playlist'],
 };
 
-export const viewport: Viewport = {
-  colorScheme: 'light',
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${roboto.variable} scheme-light`} data-theme="light">

@@ -7,9 +7,9 @@ export const mockGenres = [
 ];
 
 export const mockTags = [
-  'favorites', 'viagem', 'estudo', 'treino', 'relaxar', 'festa',
-  'melancolia', 'euforia', 'clássico', 'novo', 'raro', 'cult',
-  'mainstream', 'underground', 'instrumental', 'ao vivo',
+  'Favorites', 'Viagem', 'Estudo', 'Treino', 'Relaxar', 'Festa',
+  'Melancolia', 'Euforia', 'Clássico', 'Novo', 'Raro', 'Cult',
+  'Mainstream', 'Underground', 'Instrumental', 'Ao vivo',
 ];
 
 export const mockArtists = [
@@ -27,21 +27,21 @@ export const mockRecommenders = [
 const PITCH_BASE = 'https://media.pitchfork.com/photos';
 const SPTF_BASE = 'https://i.scdn.co/image';
 const covers = {
-  damn:        `${PITCH_BASE}/5929c3e8eb335119a49ed80f/1:1/w_300,c_limit/31d2b6fd.jpg`,
-  flowerBoy:   `${PITCH_BASE}/59663e05ec814a1a5898c3a3/1:1/w_300,c_limit/tyler-the-creator-flower-boy-cover-1.jpg`,
+  damn: `${PITCH_BASE}/5929c3e8eb335119a49ed80f/1:1/w_300,c_limit/31d2b6fd.jpg`,
+  flowerBoy: `${PITCH_BASE}/59663e05ec814a1a5898c3a3/1:1/w_300,c_limit/tyler-the-creator-flower-boy-cover-1.jpg`,
   chromakopia: `${PITCH_BASE}/671f8c1e86725d26e919a455/1:1/w_300,c_limit/Tyler-the-Creator-Chromakopia.jpg`,
-  blonde:       `${SPTF_BASE}/ab67616d00001e02c5649add07ed3720be9d5526`,
-  sos:       `${SPTF_BASE}/ab67616d00001e02bc18bdade69ec5ef0bb25b17`,
-  unVerano:       `${SPTF_BASE}/ab67616d00001e0249d694203245f241a1bcaa72`,
-  renaissance:       `${SPTF_BASE}/ab67616d00001e0269a3c061676c2020adfe8315`,
-  gnx:       `${SPTF_BASE}/ab67616d00001e02e2a0a166493a2bde5480a420`,
-  inRainbows:       `${SPTF_BASE}/ab67616d00001e02de3c04b5fc750b68899b20a9`,
-  currents:       `${SPTF_BASE}/ab67616d00001e029e1cfc756886ac782e363d79`,
-  swimming:       `${SPTF_BASE}/ab67616d00001e02175c577a61aa13d4fb4b6534`,
-  channelOrange:       `${SPTF_BASE}/ab67616d00001e027aede4855f6d0d738012e2e5`,
-  twiceAsTall:       `${SPTF_BASE}/ab67616d00001e023478524ed62d216a705c2424`,
-  ladrao:       `${SPTF_BASE}/ab67616d00001e02b38bf2feb369d835560a94cf`,
-  daLua:       `${SPTF_BASE}/ab67616d00001e02b61aa2db79f020728046b39c`,
+  blonde: `${SPTF_BASE}/ab67616d00001e02c5649add07ed3720be9d5526`,
+  sos: `${SPTF_BASE}/ab67616d00001e02bc18bdade69ec5ef0bb25b17`,
+  unVerano: `${SPTF_BASE}/ab67616d00001e0249d694203245f241a1bcaa72`,
+  renaissance: `${SPTF_BASE}/ab67616d00001e0269a3c061676c2020adfe8315`,
+  gnx: `${SPTF_BASE}/ab67616d00001e02e2a0a166493a2bde5480a420`,
+  inRainbows: `${SPTF_BASE}/ab67616d00001e02de3c04b5fc750b68899b20a9`,
+  currents: `${SPTF_BASE}/ab67616d00001e029e1cfc756886ac782e363d79`,
+  swimming: `${SPTF_BASE}/ab67616d00001e02175c577a61aa13d4fb4b6534`,
+  channelOrange: `${SPTF_BASE}/ab67616d00001e027aede4855f6d0d738012e2e5`,
+  twiceAsTall: `${SPTF_BASE}/ab67616d00001e023478524ed62d216a705c2424`,
+  ladrao: `${SPTF_BASE}/ab67616d00001e02b38bf2feb369d835560a94cf`,
+  daLua: `${SPTF_BASE}/ab67616d00001e02b61aa2db79f020728046b39c`,
 };
 
 export const mockItems: IItem[] = [

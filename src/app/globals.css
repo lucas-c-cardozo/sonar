@@ -74,7 +74,7 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
-  
+
   /* Borders */
   --color-border: var(--border-color);
   --color-border-accent: var(--border-accent);
@@ -87,9 +87,12 @@
   --animate-float: float 3s ease-in-out infinite;
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-6px);
     }
@@ -106,9 +109,6 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
-  /* Prevents browser forced-dark overrides */
-  forced-color-adjust: none;
 }
 
 body {
@@ -125,13 +125,16 @@ body {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-surface);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-light);
 }
