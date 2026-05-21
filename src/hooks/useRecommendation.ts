@@ -14,10 +14,8 @@ export function useRecommendation(
     setRecommendation(null);
 
     setTimeout(() => {
-      const candidates = mockItems.filter( 
-        (i) =>
-          i.genres.includes(selectedGenre)
-          && !items.some(item => item.id === i.id)
+      const candidates = mockItems.filter(
+        (i) => i.genres.includes(selectedGenre)
       );
 
       const picked = candidates[Math.floor(Math.random() * candidates.length)];
