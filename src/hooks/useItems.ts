@@ -2,53 +2,38 @@
 
 import { mockItems } from '@/data/mockData';
 import { FilterState, IItem } from '@/types/item';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
-// ─── Global in-memory store ───────────────────────────────────────────────────
-let _items: IItem[] = mockItems.filter(i => i.lists.length);
-const _listeners = new Set<() => void>();
-
-function subscribe(fn: () => void) {
-  _listeners.add(fn);
-  return () => _listeners.delete(fn);
-}
-
-function notify() {
-  _listeners.forEach((fn) => fn());
-}
-
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 export function useItemStore() {
-  const [, rerender] = useState(0);
+  const [items, setItems] = useState<IItem[]>(mockItems);
 
-  useEffect(() => {
-    const unsub = subscribe(() => rerender((n) => n + 1));
-    unsub();
-  }, []);
-
-  const items = _items;
-
-  const createItem = useCallback((item: Omit<IItem, 'id'>) => {
-    const newItem: IItem = { ...item, id: uuidv4() };
-    _items = [..._items, newItem];
-    notify();
+  const createItem = (item: Omit<IItem, 'id'>) => {
+    setItems((prev) => [
+      ...prev,
+      { ...item, id: uuidv4() }
+    ])
     toast.success('Item adicionado!');
-    return newItem;
-  }, []);
+  }
 
-  const updateItem = useCallback((updated: IItem) => {
-    _items = _items.map((i) => (i.id === updated.id ? updated : i));
-    notify();
+  const updateItem = (updated: IItem) => {
+    setItems((prev) => prev.toSpliced(
+      prev.findIndex(({ id }) => id === updated.id),
+      1,
+      updated
+    ));
     toast.success('Item atualizado!');
-  }, []);
+  }
 
-  const deleteItem = useCallback((id: string) => {
-    _items = _items.filter((i) => i.id !== id);
-    notify();
+  const deleteItem = (id: string) => {
+    setItems((prev) => prev.toSpliced(
+      prev.findIndex((i) => id === i.id),
+      1
+    ));
     toast.success('Item removido!');
-  }, []);
+  }
 
   return { items, createItem, updateItem, deleteItem };
 }
