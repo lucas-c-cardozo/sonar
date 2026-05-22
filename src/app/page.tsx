@@ -10,7 +10,7 @@ import { ItemFormModal } from '@/components/ItemFormModal';
 import { RecommendationSection } from '@/components/RecommendationSection';
 import { useFilteredItems, useItemsByList, useItemStore } from '@/hooks/useItems';
 import { EMPTY_FILTERS, FilterState, FIXED_LISTS, IItem } from '@/types/item';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export default function Home() {
   const { items, createItem, updateItem, deleteItem } = useItemStore();
@@ -40,10 +40,7 @@ export default function Home() {
   const [newListName, setNewListName] = useState('');
 
   // All lists = fixed + custom
-  const allLists = [...FIXED_LISTS, ...customLists];
-
-  // Refs for scroll-to-list
-  const listRefs = useRef<Record<string, HTMLElement | null>>({});
+  const allLists = useMemo(() => [...FIXED_LISTS, ...customLists], [customLists]);
 
   // Filter handler
   const handleSearch = useCallback(() => {
@@ -224,7 +221,7 @@ export default function Home() {
       {/* Create List Modal */}
       {showCreateList && (
         <div
-          className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/40 backdrop-blur-[.375rem]"
+          className="fixed inset-0 z-80 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[.375rem]"
           onClick={() => setShowCreateList(false)}
         >
           <div
