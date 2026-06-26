@@ -51,7 +51,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setIsAuthOpen(true)}
-                className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-white/10 border border-white/15 hover:bg-white/15 transition"
+                className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-white/10 border border-white/15 hover:bg-white/15 cursor-pointer  transition-all duration-300 ease-out hover:-translate-y-1"
               >
                 Entrar / Cadastrar
               </button>

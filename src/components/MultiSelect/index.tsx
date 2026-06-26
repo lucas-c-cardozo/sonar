@@ -35,10 +35,12 @@ export function MultiSelect({ id, label, options, value, onChange, placeholder =
   const select = (opt: string) => {
     onChange([...value, opt]);
     setQuery('');
+    setOpen(false);
   };
 
   const remove = (opt: string) => {
     onChange(value.filter((v) => v !== opt));
+    setOpen(false);
   };
 
   return (
@@ -112,7 +114,7 @@ export function MultiSelect({ id, label, options, value, onChange, placeholder =
             <li key={opt}>
               <button
                 type="button"
-                className="w-full text-left px-3 py-2 text-sm transition-colors duration-100 text-text-primary bg-transparent hover:bg-bg-surface"
+                className="w-full text-left px-3 py-2 text-sm transition-colors duration-100 cursor-pointer text-text-primary bg-transparent hover:bg-bg-surface"
                 onClick={() => select(opt)}
               >
                 {opt}

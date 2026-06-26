@@ -33,7 +33,7 @@ export function CollapsibleList({
       <button
         type="button"
         id={`list-toggle-${title.replace(/\s+/g, '-').toLowerCase()}`}
-        className={`w-full flex items-center justify-between px-5 py-4 transition-colors duration-200 ${isOpen ? 'bg-bg-surface border-b border-border' : 'bg-transparent border-none'}`}
+        className={`w-full flex items-center justify-between px-5 py-4 transition-colors duration-200 cursor-pointer ${isOpen ? 'bg-bg-surface border-b border-border' : 'bg-transparent border-none'}`}
         onClick={() => setIsOpen((o) => !o)}
         aria-expanded={isOpen}
       >
